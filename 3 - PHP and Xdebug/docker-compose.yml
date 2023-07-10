@@ -9,7 +9,7 @@ services:
     networks:
       - internal
     volumes:
-      - ./data/:/var/www/html
+      - ${WWW_PATH}:/var/www/html
   php:
     build:
       context: .
@@ -17,9 +17,9 @@ services:
     networks:
       - internal
     environment:
-      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9000 remote_enable=1
+      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9000 remote_enable=${DEBUG}
     volumes:
-      - ./data:/var/www/html
+      - ${WWW_PATH}:/var/www/html
       - /logs/php.log:/var/log/fpm-php.www.log
 networks:
   internal:
